@@ -1,0 +1,49 @@
+---
+import type { ArchiveEvent } from '../data/events';
+
+interface Props {
+	event: ArchiveEvent;
+}
+
+const { event } = Astro.props;
+const toneLabel = {
+	official: '官方',
+	participant: '演员 / 工作人员',
+	unofficial: '非官方消息',
+}[event.tone];
+---
+
+<article class="event-row">
+	<time class="timeline-date" datetime={event.date}>
+		<strong>{event.date.slice(5).replace('-', '.')}</strong>
+		<span>{event.date.slice(0, 4)} · {event.monthZh}</span>
+	</time>
+
+	<div class="timeline-node-wrap" aria-hidden="true">
+		<span class:list={['timeline-node', `timeline-node--${event.tone}`]}></span>
+	</div>
+
+	<div class="event-copy">
+		<div class="event-meta">
+			<span>RECORD NO. {event.id}</span>
+		</div>
+		<h3>{event.title}</h3>
+		<p>{event.summary}</p>
+		<div class="event-links">
+			<span class:list={['event-source-type', `event-source-type--${event.tone}`]}>{toneLabel}</span>
+			{event.href && (
+				<a class="source-link" href={event.href} target="_blank" rel="noreferrer">
+					查看来源 <span aria-hidden="true">↗</span>
+				</a>
+			)}
+		</div>
+	</div>
+
+	{event.archiveUrl ? (
+		<a class="event-document" href={event.archiveUrl} target="_blank" rel="noreferrer">
+			查看档案 <span aria-hidden="true">↗</span>
+		</a>
+	) : (
+		<span class="event-document event-document--pending">档案待补</span>
+	)}
+</article>

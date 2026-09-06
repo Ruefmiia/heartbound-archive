@@ -1,0 +1,45 @@
+---
+import type { ArchiveEvent } from '../data/events';
+import EventRow from './EventRow.astro';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+	eyebrow: string;
+	title: string;
+	description: string;
+	events: ArchiveEvent[];
+	emptyTitle?: string;
+	emptyDescription?: string;
+}
+
+const {
+	eyebrow,
+	title,
+	description,
+	events,
+	emptyTitle = '暂无档案',
+	emptyDescription = '相关信息确认后会在这里补充。',
+} = Astro.props;
+---
+
+<Layout title={`${title}｜Heartbound档案库`} description={description}>
+	<section class="archive-intro" aria-labelledby="archive-title">
+		<span>{eyebrow}</span>
+		<h1 id="archive-title">{title}</h1>
+		<p>{description}</p>
+	</section>
+
+	<section class="archive-content" aria-label={`${title}列表`}>
+		{events.length > 0 ? (
+			<div class="event-list">
+				{events.map((event) => <EventRow event={event} />)}
+			</div>
+		) : (
+			<div class="empty-state">
+				<span>COMING SOON</span>
+				<h2>{emptyTitle}</h2>
+				<p>{emptyDescription}</p>
+			</div>
+		)}
+	</section>
+</Layout>

@@ -1,11 +1,89 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import EventRow from '../components/EventRow.astro';
 import Layout from '../layouts/Layout.astro';
+import { events } from '../data/events';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const latestEvents = events.slice(0, 4);
+const latestEvent = events[0];
+const latestShortDate = latestEvent?.date.slice(5).replace('-', '.') ?? '—';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sitePath = (path: string) => `${base}${path}` || '/';
+const directories = [
+	{ href: '/production', index: '01', title: '制作档案', label: 'PRODUCTION' },
+	{ href: '/promotion', index: '02', title: '宣传档案', label: 'PROMOTION' },
+	{ href: '/episodes', index: '03', title: '播出档案', label: 'EPISODES' },
+	{ href: '/materials', index: '04', title: '官方物料', label: 'MATERIALS' },
+	{ href: '/novel', index: '05', title: '原著与作者', label: 'NOVEL' },
+];
 ---
 
 <Layout>
-	<Welcome />
+	<section class="hero" aria-labelledby="page-title">
+		<div class="hero-kicker">PERTHSANTA · SERIES RECORD</div>
+		<div class="hero-grid">
+			<div>
+				<h1 id="page-title"><span>HEARTBOUND</span><span>档案库</span></h1>
+			</div>
+			<div class="hero-status">
+				<span>2026</span>
+				<strong><i aria-hidden="true"></i> 前期制作</strong>
+				<small>LAST UPDATED {latestShortDate}</small>
+			</div>
+		</div>
+	</section>
+
+	<section class="legend" aria-label="信息类型说明">
+		<span><i class="dot dot--red" aria-hidden="true"></i> 官方</span>
+		<span><i class="dot dot--white" aria-hidden="true"></i> 演员 / 工作人员</span>
+		<span><i class="dot dot--gray" aria-hidden="true"></i> 非官方消息</span>
+	</section>
+
+	<section class="records-section" aria-labelledby="latest-title">
+		<div class="section-heading">
+			<div>
+				<span class="section-index">01</span>
+				<h2 id="latest-title">最新档案</h2>
+			</div>
+			<a href={sitePath('/timeline')}>查看全部 {String(events.length).padStart(2, '0')} 条 <span aria-hidden="true">→</span></a>
+		</div>
+		<div class="event-list">
+			{latestEvents.map((event) => <EventRow event={event} />)}
+		</div>
+	</section>
+
+	<section class="directory-section" aria-labelledby="directory-title">
+		<div class="section-heading">
+			<div>
+				<span class="section-index">02</span>
+				<h2 id="directory-title">档案目录</h2>
+			</div>
+		</div>
+		<div class="directory-grid">
+			{directories.map((item) => (
+				<a href={sitePath(item.href)}>
+					<span>{item.index}</span>
+					<strong>{item.title}</strong>
+					<small>{item.label} <i aria-hidden="true">→</i></small>
+				</a>
+			))}
+		</div>
+	</section>
+
+	<section class="summary-grid" aria-label="档案概览">
+		<div class="summary-block summary-block--light">
+			<span>STARTED</span>
+			<strong>07.19</strong>
+			<p>项目及先导预告公开</p>
+		</div>
+		<div class="summary-block">
+			<span>LATEST</span>
+			<strong>{latestShortDate}</strong>
+			<p>{latestEvent?.title ?? '暂无记录'}</p>
+		</div>
+		<div class="summary-block summary-block--red">
+			<span>NEXT</span>
+			<strong>09.07</strong>
+			<p>Workshop计划开始</p>
+		</div>
+	</section>
 </Layout>

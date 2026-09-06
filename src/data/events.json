@@ -1,0 +1,127 @@
+[
+	{
+		"id": "009",
+		"date": "2026-09-05",
+		"day": "05",
+		"monthZh": "九月",
+		"title": "演员透露即将开始Workshop",
+		"summary": "Perth与Santa在活动中透露，Heartbound计划于9月7日开始Workshop。",
+		"type": "演员透露",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://weibo.com/6388276008/5339921122335082"
+	},
+	{
+		"id": "008",
+		"date": "2026-09-03",
+		"day": "03",
+		"monthZh": "九月",
+		"title": "Heartbound制作进度更新",
+		"summary": "来自公开活动相关内容的阶段性进度整理，等待后续官方信息。",
+		"type": "演员／工作人员",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://weibo.com/6388276008/5339145675211486"
+	},
+	{
+		"id": "007",
+		"date": "2026-08-31",
+		"day": "31",
+		"monthZh": "八月",
+		"title": "Heartbound制作进度更新",
+		"summary": "来自公开活动相关内容的阶段性进度整理，等待后续官方信息。",
+		"type": "演员／工作人员",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://weibo.com/6388276008/5337999587939815"
+	},
+	{
+		"id": "006",
+		"date": "2026-08-28",
+		"day": "28",
+		"monthZh": "八月",
+		"title": "Heartbound制作进度更新",
+		"summary": "来自公开活动相关内容的阶段性进度整理，等待后续官方信息。",
+		"type": "演员／工作人员",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://weibo.com/6388276008/5336996005551089"
+	},
+	{
+		"id": "005",
+		"date": "2026-08-18",
+		"day": "18",
+		"monthZh": "八月",
+		"title": "Heartbound制作进度更新",
+		"summary": "来自公开活动相关内容的阶段性进度整理，等待后续官方信息。",
+		"type": "演员／工作人员",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://weibo.com/6388276008/5333359578580848"
+	},
+	{
+		"id": "004",
+		"date": "2026-07-31",
+		"day": "31",
+		"monthZh": "七月",
+		"title": "先导预告播放量突破100万",
+		"summary": "Heartbound官方账号发布百万播放纪念内容，Perth与Santa转发。",
+		"type": "官方",
+		"tone": "official",
+		"sections": [
+			"promotion"
+		]
+	},
+	{
+		"id": "003",
+		"date": "2026-07-19",
+		"day": "19",
+		"monthZh": "七月",
+		"title": "Perth与Santa更新相关内容",
+		"summary": "两位主演通过个人Instagram与X账号更新Heartbound相关内容。",
+		"type": "主演更新",
+		"tone": "participant",
+		"sections": [
+			"promotion"
+		]
+	},
+	{
+		"id": "002",
+		"date": "2026-07-19",
+		"day": "19",
+		"monthZh": "七月",
+		"title": "Fon Kanittha发布拍摄花絮",
+		"summary": "导演Fon Kanittha通过Instagram发布先导预告拍摄花絮照片。",
+		"type": "导演更新",
+		"tone": "participant",
+		"sections": [
+			"production",
+			"materials"
+		]
+	},
+	{
+		"id": "001",
+		"date": "2026-07-19",
+		"day": "19",
+		"monthZh": "七月",
+		"title": "《Heartbound》先导预告发布",
+		"summary": "Perth与Santa主演的新剧《Heartbound》公开，先导预告正式上线。",
+		"type": "官方",
+		"tone": "official",
+		"sections": [
+			"promotion",
+			"materials"
+		],
+		"href": "https://www.youtube.com/watch?v=I1guVkLJ4mU"
+	}
+]

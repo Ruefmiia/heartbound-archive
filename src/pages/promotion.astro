@@ -1,0 +1,13 @@
+---
+import SectionPage from '../components/SectionPage.astro';
+import { events } from '../data/events';
+
+const promotionEvents = events.filter((event) => event.sections.includes('promotion'));
+---
+
+<SectionPage
+	eyebrow="PROMOTION ARCHIVE"
+	title="宣传档案"
+	description="收录先导预告、官方宣传与主创公开更新。"
+	events={promotionEvents}
+/>

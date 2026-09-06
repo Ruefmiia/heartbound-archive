@@ -1,0 +1,13 @@
+---
+import SectionPage from '../components/SectionPage.astro';
+import { events } from '../data/events';
+
+const productionEvents = events.filter((event) => event.sections.includes('production'));
+---
+
+<SectionPage
+	eyebrow="PRODUCTION ARCHIVE"
+	title="制作档案"
+	description="记录Workshop、剧本围读、定妆、拍摄与杀青等制作节点。"
+	events={productionEvents}
+/>

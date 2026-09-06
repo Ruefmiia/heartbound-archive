@@ -1,0 +1,61 @@
+---
+import EventRow from '../components/EventRow.astro';
+import Layout from '../layouts/Layout.astro';
+import { events } from '../data/events';
+
+const englishMonths = [
+	'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+	'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER',
+];
+const chineseMonths = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+const groupedEvents = new Map<string, typeof events>();
+const years = [...new Set(events.map((event) => event.date.slice(0, 4)))].sort();
+const yearLabel = years.length > 1 ? `${years[0]}–${years.at(-1)}` : years[0] ?? 'ARCHIVE';
+
+for (const event of [...events].sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id))) {
+	const key = event.date.slice(0, 7);
+	const group = groupedEvents.get(key) ?? [];
+	group.push(event);
+	groupedEvents.set(key, group);
+}
+
+const groups = Array.from(groupedEvents, ([key, groupEvents]) => {
+	const [year, monthText] = key.split('-');
+	const monthIndex = Number(monthText) - 1;
+	return {
+		id: `month-${key}`,
+		label: `${englishMonths[monthIndex]} ${year} / ${year}年${chineseMonths[monthIndex]}`,
+		events: groupEvents,
+	};
+});
+---
+
+<Layout title="时间线｜Heartbound档案库" description="《Heartbound》剧集制作与宣传事件时间线。">
+	<section class="page-intro">
+		<div class="hero-kicker">RECORDTRACK · {yearLabel} EDITION</div>
+		<div class="page-intro-grid">
+			<h1>完整时间线</h1>
+			<div>
+				<strong>{String(events.length).padStart(2, '0')}</strong>
+				<span>RECORDS</span>
+			</div>
+		</div>
+	</section>
+
+	<section class="legend" aria-label="信息类型说明">
+		<span><i class="dot dot--red" aria-hidden="true"></i> 官方</span>
+		<span><i class="dot dot--white" aria-hidden="true"></i> 演员 / 工作人员</span>
+		<span><i class="dot dot--gray" aria-hidden="true"></i> 非官方消息</span>
+	</section>
+
+	<div class="timeline-groups">
+		{groups.map((group) => (
+			<section class="timeline-group" aria-labelledby={group.id}>
+				<h2 id={group.id}>{group.label}</h2>
+				<div class="event-list">
+					{group.events.map((event) => <EventRow event={event} />)}
+				</div>
+			</section>
+		))}
+	</div>
+</Layout>

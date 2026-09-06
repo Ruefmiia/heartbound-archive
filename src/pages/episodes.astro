@@ -1,0 +1,15 @@
+---
+import SectionPage from '../components/SectionPage.astro';
+import { events } from '../data/events';
+
+const episodeEvents = events.filter((event) => event.sections.includes('episodes'));
+---
+
+<SectionPage
+	eyebrow="EPISODE ARCHIVE"
+	title="播出档案"
+	description="开播后按集整理播出信息与相关记录。"
+	events={episodeEvents}
+	emptyTitle="尚未进入播出阶段"
+	emptyDescription="正式开播后，这里将按集更新。"
+/>

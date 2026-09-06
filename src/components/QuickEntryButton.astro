@@ -1,0 +1,199 @@
+---
+import { events } from '../data/events';
+
+const serializedEvents = JSON.stringify(events).replaceAll('<', '\\u003c');
+---
+
+<button class="quick-entry-trigger" type="button" data-quick-entry-open>
+	<span aria-hidden="true">＋</span> 快速录入
+</button>
+
+<dialog class="quick-entry-dialog" data-quick-entry-dialog aria-labelledby="quick-entry-title">
+	<form class="quick-entry-form" data-quick-entry-form>
+		<header>
+			<div>
+				<span>LOCAL ARCHIVE EDITOR</span>
+				<h2 id="quick-entry-title">录入 / 编辑档案</h2>
+			</div>
+			<button type="button" class="dialog-close" data-quick-entry-close aria-label="关闭录入窗口">×</button>
+		</header>
+
+		<div class="quick-entry-existing">
+			<label for="event-picker">编辑已有节点</label>
+			<select id="event-picker" data-event-picker>
+				<option value="">新增档案</option>
+				{events.map((event) => <option value={event.id}>{event.id} · {event.date} · {event.title}</option>)}
+			</select>
+		</div>
+
+		<div class="form-grid form-grid--compact">
+			<label>
+				<span>档案编号</span>
+				<input name="id" inputmode="numeric" pattern="\d{3,}" required />
+			</label>
+			<label>
+				<span>日期</span>
+				<input name="date" type="date" required />
+			</label>
+		</div>
+
+		<label>
+			<span>标题</span>
+			<input name="title" required maxlength="100" />
+		</label>
+
+		<label>
+			<span>简短说明</span>
+			<textarea name="summary" required maxlength="500" rows="3"></textarea>
+		</label>
+
+		<div class="form-grid">
+			<label>
+				<span>信息类型</span>
+				<select name="tone" required>
+					<option value="official">官方</option>
+					<option value="participant">演员 / 工作人员</option>
+					<option value="unofficial">非官方消息</option>
+				</select>
+			</label>
+
+			<fieldset>
+				<legend>所属栏目（可多选）</legend>
+				<div class="checkbox-group">
+					<label><input type="checkbox" name="sections" value="production" /> 制作</label>
+					<label><input type="checkbox" name="sections" value="promotion" /> 宣传</label>
+					<label><input type="checkbox" name="sections" value="episodes" /> 播出</label>
+					<label><input type="checkbox" name="sections" value="materials" /> 物料</label>
+				</div>
+			</fieldset>
+		</div>
+
+		<label>
+			<span>消息来源链接</span>
+			<input name="href" type="url" placeholder="https://" />
+		</label>
+
+		<label>
+			<span>档案文档链接（飞书 / 语雀）</span>
+			<input name="archiveUrl" type="url" placeholder="https://" />
+		</label>
+
+		<p class="form-status" data-form-status role="status" aria-live="polite"></p>
+		<footer>
+			<button type="button" class="button-secondary" data-quick-entry-close>取消</button>
+			<button type="submit" class="button-primary">保存到档案库</button>
+		</footer>
+	</form>
+</dialog>
+
+<script id="quick-entry-data" type="application/json" set:html={serializedEvents}></script>
+<script>
+	const dialog = document.querySelector('[data-quick-entry-dialog]');
+	const openButton = document.querySelector('[data-quick-entry-open]');
+	const form = document.querySelector('[data-quick-entry-form]');
+	const picker = document.querySelector('[data-event-picker]');
+	const status = document.querySelector('[data-form-status]');
+	const dataElement = document.querySelector('#quick-entry-data');
+	const archiveEvents = JSON.parse(dataElement?.textContent || '[]');
+	const toneLabels = {
+		official: '官方',
+		participant: '演员／工作人员',
+		unofficial: '非官方消息',
+	};
+
+	function nextId() {
+		const highest = archiveEvents.reduce((max, event) => Math.max(max, Number(event.id) || 0), 0);
+		return String(highest + 1).padStart(3, '0');
+	}
+
+	function localDate() {
+		const now = new Date();
+		const offset = now.getTimezoneOffset() * 60_000;
+		return new Date(now.getTime() - offset).toISOString().slice(0, 10);
+	}
+
+	function field(name) {
+		return form?.querySelector(`[name="${name}"]`);
+	}
+
+	function prepareNew() {
+		form?.reset();
+		if (picker) picker.value = '';
+		const idField = field('id');
+		if (idField) {
+			idField.value = nextId();
+			idField.readOnly = false;
+		}
+		const dateField = field('date');
+		if (dateField) dateField.value = localDate();
+		if (status) status.textContent = '';
+	}
+
+	function loadEvent(id) {
+		const event = archiveEvents.find((item) => item.id === id);
+		if (!event) return prepareNew();
+		for (const name of ['id', 'date', 'title', 'summary', 'tone', 'href', 'archiveUrl']) {
+			const input = field(name);
+			if (input) input.value = event[name] || '';
+		}
+		const idField = field('id');
+		if (idField) idField.readOnly = true;
+		form?.querySelectorAll('[name="sections"]').forEach((input) => {
+			input.checked = event.sections.includes(input.value);
+		});
+		if (status) status.textContent = `正在编辑 RECORD NO. ${event.id}`;
+	}
+
+	openButton?.addEventListener('click', () => {
+		prepareNew();
+		dialog?.showModal();
+	});
+
+	document.querySelectorAll('[data-quick-entry-close]').forEach((button) => {
+		button.addEventListener('click', () => dialog?.close());
+	});
+
+	picker?.addEventListener('change', () => loadEvent(picker.value));
+
+	form?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		const formData = new FormData(form);
+		const sections = formData.getAll('sections').map(String);
+		if (sections.length === 0) {
+			if (status) status.textContent = '请至少选择一个所属栏目。';
+			return;
+		}
+
+		const tone = String(formData.get('tone'));
+		const payload = {
+			id: String(formData.get('id')),
+			date: String(formData.get('date')),
+			title: String(formData.get('title')),
+			summary: String(formData.get('summary')),
+			tone,
+			type: toneLabels[tone],
+			sections,
+			href: String(formData.get('href') || ''),
+			archiveUrl: String(formData.get('archiveUrl') || ''),
+		};
+
+		const submitButton = form.querySelector('[type="submit"]');
+		submitButton?.setAttribute('disabled', '');
+		if (status) status.textContent = '正在保存…';
+
+		try {
+			const response = await fetch('/__heartbound/events', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ event: payload }),
+			});
+			const result = await response.json();
+			if (!response.ok) throw new Error(result.error || '保存失败。');
+			if (status) status.textContent = '保存成功，页面即将刷新。';
+			setTimeout(() => window.location.reload(), 450);
+		} catch (error) {
+			if (status) status.textContent = error instanceof Error ? error.message : '保存失败。';
+			submitButton?.removeAttribute('disabled');
+		}
+	});
+</script>

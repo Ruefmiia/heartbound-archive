@@ -1,0 +1,13 @@
+---
+import SectionPage from '../components/SectionPage.astro';
+import { events } from '../data/events';
+
+const materialEvents = events.filter((event) => event.sections.includes('materials'));
+---
+
+<SectionPage
+	eyebrow="OFFICIAL MATERIALS"
+	title="官方物料"
+	description="集中索引预告、海报、剧照与幕后花絮等公开物料。"
+	events={materialEvents}
+/>

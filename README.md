@@ -1,46 +1,37 @@
-# Astro Starter Kit: Basics
+# Heartbound档案库
+
+PerthSanta主役剧集《Heartbound》的制作、宣传、物料与播出档案索引。
+
+网站使用 Astro 构建，详细图文资料保存在飞书或语雀，网站负责时间线、分类索引和来源跳转。
+
+## 本地开发
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev -- --background
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+打开 `http://localhost:4321/`。开发环境右下角的“快速录入”按钮可以新增或编辑档案，数据会保存至 `src/data/events.json`。
 
-## 🚀 Project Structure
+## 常用命令
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```sh
+npm run build
+npm run preview
+npm run astro -- dev status
+npm run astro -- dev stop
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 内容结构
 
-## 🧞 Commands
+- `src/data/events.json`：时间线与栏目索引数据
+- `src/pages/`：首页、时间线及各档案栏目
+- `src/components/`：公共界面组件
+- `src/styles/global.css`：全站基础样式
+- `integrations/local-events-editor.mjs`：仅在本地开发服务器中启用的录入接口
 
-All commands are run from the root of the project, from a terminal:
+## 发布
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+`main` 分支是网站唯一源码。GitHub Pages 和 Tencent EdgeOne Pages 均从该分支构建，生产输出目录为 `dist`。
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+本地快速录入不会直接修改线上网站。完成录入并检查后，需要提交并推送代码，两个站点才会自动更新。
