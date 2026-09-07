@@ -10,6 +10,8 @@ interface Props {
 	events: ArchiveEvent[];
 	emptyTitle?: string;
 	emptyDescription?: string;
+	filterType?: string;
+	filterLabel?: string;
 }
 
 const {
@@ -19,17 +21,31 @@ const {
 	events,
 	emptyTitle = '暂无档案',
 	emptyDescription = '相关信息确认后会在这里补充。',
+	filterType,
+	filterLabel,
 } = Astro.props;
 ---
 
 <Layout title={`${title}｜Heartbound档案库`} description={description}>
-	<section class="archive-intro" aria-labelledby="archive-title">
+	<section class:list={['archive-intro', { 'archive-intro--filterable': filterType }]} aria-labelledby="archive-title">
 		<span>{eyebrow}</span>
 		<h1 id="archive-title">{title}</h1>
 		<p>{description}</p>
+		{filterType && filterLabel && (
+			<button
+				class="archive-filter"
+				type="button"
+				data-event-filter
+				data-filter-type={filterType}
+				aria-pressed="false"
+			>
+				<i aria-hidden="true"></i>
+				{filterLabel}
+			</button>
+		)}
 	</section>
 
-	<section class="archive-content" aria-label={`${title}列表`}>
+	<section class="archive-content" aria-label={`${title}列表`} data-filter-results>
 		{events.length > 0 ? (
 			<div class="event-list">
 				{events.map((event) => <EventRow event={event} />)}
@@ -43,3 +59,21 @@ const {
 		)}
 	</section>
 </Layout>
+
+<script>
+	const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-event-filter]');
+
+	for (const button of filterButtons) {
+		button.addEventListener('click', () => {
+			const isActive = button.getAttribute('aria-pressed') === 'true';
+			const nextActive = !isActive;
+			const filterType = button.dataset.filterType;
+			const results = button.closest('main')?.querySelector('[data-filter-results]');
+
+			button.setAttribute('aria-pressed', String(nextActive));
+			for (const row of results?.querySelectorAll<HTMLElement>('[data-event-type]') ?? []) {
+				row.hidden = nextActive && row.dataset.eventType !== filterType;
+			}
+		});
+	}
+</script>

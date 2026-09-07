@@ -288,6 +288,10 @@ a {
 	bottom: calc(100% - 29px);
 }
 
+.event-row[hidden] {
+	display: none;
+}
+
 .timeline-date {
 	display: flex;
 	align-items: flex-end;
@@ -353,6 +357,14 @@ a {
 	gap: 16px;
 	margin-bottom: 8px;
 	color: var(--gray-dark);
+}
+
+.event-kind {
+	padding: 2px 6px;
+	border: 1px solid var(--red);
+	color: var(--red);
+	font-size: 0.62rem;
+	line-height: 1;
 }
 
 .event-copy h3 {
@@ -507,8 +519,53 @@ a.event-document:hover {
 }
 
 .archive-intro {
+	position: relative;
 	padding: clamp(32px, 4.5vw, 50px) 22px 28px;
 	border-bottom: 1px solid var(--line);
+}
+
+.archive-intro--filterable {
+	padding-right: 190px;
+}
+
+.archive-filter {
+	position: absolute;
+	top: 50%;
+	right: 22px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 132px;
+	min-height: 44px;
+	gap: 9px;
+	padding: 0 16px;
+	border: 1px solid var(--red);
+	background: transparent;
+	color: var(--red);
+	font: 800 0.72rem/1 var(--font-body);
+	letter-spacing: 0.1em;
+	cursor: pointer;
+	transform: translateY(-50%);
+}
+
+.archive-filter i {
+	width: 7px;
+	height: 7px;
+	border: 1px solid currentColor;
+	border-radius: 50%;
+}
+
+.archive-filter:hover {
+	background: rgba(235, 34, 66, 0.12);
+}
+
+.archive-filter[aria-pressed='true'] {
+	background: var(--red);
+	color: var(--white);
+}
+
+.archive-filter[aria-pressed='true'] i {
+	background: currentColor;
 }
 
 .archive-intro > span,
@@ -1162,6 +1219,17 @@ a.event-document:hover {
 }
 
 @media (width <= 720px) {
+	.archive-intro--filterable {
+		padding-right: 10px;
+	}
+
+	.archive-filter {
+		position: static;
+		min-width: 0;
+		margin-top: 20px;
+		transform: none;
+	}
+
 	.home-titlebar {
 		align-items: flex-start;
 		flex-direction: column;
