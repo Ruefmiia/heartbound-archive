@@ -1,89 +1,148 @@
 ---
-import EventRow from '../components/EventRow.astro';
 import Layout from '../layouts/Layout.astro';
 import { events } from '../data/events';
 
-const latestEvents = events.slice(0, 4);
 const latestEvent = events[0];
 const latestShortDate = latestEvent?.date.slice(5).replace('-', '.') ?? '—';
+const latestProductionEvents = events.filter((event) => event.sections.includes('production')).slice(0, 3);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sitePath = (path: string) => `${base}${path}` || '/';
+const assetBase = import.meta.env.BASE_URL.endsWith('/')
+	? import.meta.env.BASE_URL
+	: `${import.meta.env.BASE_URL}/`;
+
+const progressSteps = [
+	{ label: '项目公开', state: 'done' },
+	{ label: '招商片', state: 'done' },
+	{ label: 'Workshop', state: 'current' },
+	{ label: '正式拍摄', state: 'future' },
+	{ label: '播出', state: 'future' },
+];
+
+const toneLabels = {
+	official: '官方',
+	participant: '演员 / 工作人员',
+	unofficial: '非官方消息',
+};
+
 const directories = [
-	{ href: '/production', index: '01', title: '制作档案', label: 'PRODUCTION' },
-	{ href: '/promotion', index: '02', title: '宣传档案', label: 'PROMOTION' },
-	{ href: '/episodes', index: '03', title: '播出档案', label: 'EPISODES' },
-	{ href: '/materials', index: '04', title: '官方物料', label: 'MATERIALS' },
-	{ href: '/novel', index: '05', title: '原著与作者', label: 'NOVEL' },
+	{ href: '/production', title: '制作', label: 'PRODUCTION' },
+	{ href: '/promotion', title: '宣传', label: 'PROMOTION' },
+	{ href: '/materials', title: '物料', label: 'MATERIALS' },
+	{ href: '/episodes', title: '播出', label: 'EPISODES' },
+	{ href: '/novel', title: '原著与作者', label: 'NOVEL' },
 ];
 ---
 
 <Layout>
-	<section class="hero" aria-labelledby="page-title">
-		<div class="hero-kicker">PERTHSANTA · SERIES RECORD</div>
-		<div class="hero-grid">
+	<section class="home-frame" aria-labelledby="page-title">
+		<header class="home-titlebar">
 			<div>
-				<h1 id="page-title"><span>HEARTBOUND</span><span>档案库</span></h1>
+				<span>PERTHSANTA · SERIES RECORD</span>
+				<h1 id="page-title">HEARTBOUND档案库</h1>
 			</div>
-			<div class="hero-status">
-				<span>2026</span>
-				<strong><i aria-hidden="true"></i> 前期制作</strong>
-				<small>LAST UPDATED {latestShortDate}</small>
+			<div class="home-current">
+				<span><i aria-hidden="true"></i> 当前阶段</span>
+				<strong>第一次Workshop</strong>
+				<small>UPDATED {latestShortDate}</small>
 			</div>
-		</div>
-	</section>
+		</header>
 
-	<section class="legend" aria-label="信息类型说明">
-		<span><i class="dot dot--red" aria-hidden="true"></i> 官方</span>
-		<span><i class="dot dot--white" aria-hidden="true"></i> 演员 / 工作人员</span>
-		<span><i class="dot dot--gray" aria-hidden="true"></i> 非官方消息</span>
-	</section>
+		<div class="home-dashboard">
+			<figure class="home-poster">
+				<a
+					href={`${assetBase}images/heartbound-official-poster.jpg`}
+					target="_blank"
+					aria-label="查看《Heartbound》官方海报大图"
+				>
+					<img
+						src={`${assetBase}images/heartbound-official-poster.jpg`}
+						alt="《Heartbound》官方海报，Perth与Santa站在暖色室内场景中"
+						width="1642"
+						height="2048"
+						loading="eager"
+						decoding="async"
+					/>
+				</a>
+				<figcaption>OFFICIAL POSTER · 2026</figcaption>
+			</figure>
 
-	<section class="records-section" aria-labelledby="latest-title">
-		<div class="section-heading">
-			<div>
-				<span class="section-index">01</span>
-				<h2 id="latest-title">最新档案</h2>
-			</div>
-			<a href={sitePath('/timeline')}>查看全部 {String(events.length).padStart(2, '0')} 条 <span aria-hidden="true">→</span></a>
-		</div>
-		<div class="event-list">
-			{latestEvents.map((event) => <EventRow event={event} />)}
-		</div>
-	</section>
+			<section class="home-progress" aria-labelledby="progress-title">
+				<div class="home-panel-heading">
+					<span>PRODUCTION STATUS</span>
+					<h2 id="progress-title">制作进度</h2>
+				</div>
 
-	<section class="directory-section" aria-labelledby="directory-title">
-		<div class="section-heading">
-			<div>
-				<span class="section-index">02</span>
-				<h2 id="directory-title">档案目录</h2>
-			</div>
+				<ol class="progress-track">
+					{progressSteps.map((step) => (
+						<li class={`progress-step progress-step--${step.state}`}>
+							<i aria-hidden="true"></i>
+							<span>{step.label}</span>
+						</li>
+					))}
+				</ol>
+
+				<div class="home-actions">
+					<a
+						class="home-action home-action--primary"
+						href="https://youtu.be/I1guVkLJ4mU?si=XBZF2oesCdQ95hi_"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.8 17 12l-8.5 5.2V6.8Z"></path></svg>
+						<span><strong>观看招商片</strong><small>YOUTUBE · 1M+ VIEWS</small></span>
+					</a>
+					<a class="home-action home-action--secondary" href={sitePath('/timeline')}>
+						<span><strong>完整时间线</strong><small>{String(events.length).padStart(2, '0')} RECORDS</small></span>
+						<i aria-hidden="true">→</i>
+					</a>
+				</div>
+			</section>
+
+			<section class="home-updates" aria-labelledby="updates-title">
+				<div class="home-panel-heading home-panel-heading--row">
+					<div>
+						<span>LATEST PROGRESS</span>
+						<h2 id="updates-title">最近近况</h2>
+					</div>
+					<a href={sitePath('/production')} aria-label="查看全部制作档案">全部 →</a>
+				</div>
+
+				<div class="home-update-list">
+					{latestProductionEvents.map((event) => (
+						<article>
+							<time datetime={event.date}>{event.date.slice(5).replace('-', '.')}</time>
+							<div>
+								<strong>{event.title}</strong>
+								<span>{toneLabels[event.tone]}</span>
+							</div>
+							<a
+								href={event.href ?? sitePath('/timeline')}
+								target={event.href ? '_blank' : undefined}
+								rel={event.href ? 'noreferrer' : undefined}
+								aria-label={`查看${event.title}`}
+							>↗</a>
+						</article>
+					))}
+				</div>
+			</section>
 		</div>
-		<div class="directory-grid">
+
+		<div class="home-facts" aria-label="项目基本资料">
+			<span><small>主演</small> Perth Tanapon · Santa Pongsapak</span>
+			<span><small>导演</small> Fon Kanittha</span>
+			<a href={sitePath('/novel')}><small>原著</small> Bacteria</a>
+			<a href="https://x.com/HeartboundTH" target="_blank" rel="noreferrer"><small>官方X</small> @HeartboundTH ↗</a>
+		</div>
+
+		<nav class="home-directory" aria-label="档案目录">
 			{directories.map((item) => (
 				<a href={sitePath(item.href)}>
-					<span>{item.index}</span>
+					<span>{item.label}</span>
 					<strong>{item.title}</strong>
-					<small>{item.label} <i aria-hidden="true">→</i></small>
+					<i aria-hidden="true">→</i>
 				</a>
 			))}
-		</div>
-	</section>
-
-	<section class="summary-grid" aria-label="档案概览">
-		<div class="summary-block summary-block--light">
-			<span>STARTED</span>
-			<strong>07.19</strong>
-			<p>项目及先导预告公开</p>
-		</div>
-		<div class="summary-block">
-			<span>LATEST</span>
-			<strong>{latestShortDate}</strong>
-			<p>{latestEvent?.title ?? '暂无记录'}</p>
-		</div>
-		<div class="summary-block summary-block--red">
-			<span>CURRENT</span>
-			<strong>09.07</strong>
-			<p>第一次Workshop</p>
-		</div>
+		</nav>
 	</section>
 </Layout>
