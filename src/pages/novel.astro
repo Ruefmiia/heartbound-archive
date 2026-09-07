@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const assetBase = import.meta.env.BASE_URL.endsWith('/')
+	? import.meta.env.BASE_URL
+	: `${import.meta.env.BASE_URL}/`;
 ---
 
 <Layout title="原著与作者｜Heartbound档案库" description="Heartbound原著小说与作者信息。">
@@ -9,16 +13,37 @@ import Layout from '../layouts/Layout.astro';
 		<p>原著小说和作者资料集中在此页面，保持简洁展示。</p>
 	</section>
 
-	<section class="info-grid" aria-label="原著与作者资料">
-		<article>
-			<span>01 · NOVEL</span>
-			<h2>《Heartbound》原著小说</h2>
-			<p>作品简介、出版信息与阅读链接待确认后补充。</p>
-		</article>
-		<article>
-			<span>02 · AUTHOR</span>
-			<h2>作者资料</h2>
-			<p>作者姓名、简介与公开账号待确认后补充。</p>
-		</article>
+	<section class="novel-profile" aria-label="原著与作者资料">
+		<figure class="novel-cover">
+			<img
+				src={`${assetBase}images/novel/heartbound-novel-cover.jpg`}
+				alt="《Heartbound》原著小说封面，两名男性角色置身城市夜景"
+				width="1068"
+				height="1536"
+				loading="eager"
+				decoding="async"
+			/>
+			<figcaption>《Heartbound》原著小说封面</figcaption>
+		</figure>
+
+		<div class="novel-details">
+			<article>
+				<span>01 · NOVEL</span>
+				<h2>《Heartbound》原著小说</h2>
+				<p>中文版相关内容与阅读信息见下方链接。</p>
+				<a href="https://weibo.com/5677701191/5313443515335802" target="_blank" rel="noreferrer">
+					查看中文版 <span aria-hidden="true">↗</span>
+				</a>
+			</article>
+
+			<article>
+				<span>02 · AUTHOR</span>
+				<h2>Nabu Bacteria</h2>
+				<p>作者X账号：<strong>@NabuBacteria</strong></p>
+				<a href="https://x.com/NabuBacteria?s=20" target="_blank" rel="noreferrer">
+					访问作者X主页 <span aria-hidden="true">↗</span>
+				</a>
+			</article>
+		</div>
 	</section>
 </Layout>

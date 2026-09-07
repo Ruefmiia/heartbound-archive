@@ -645,6 +645,89 @@ a.event-document:hover {
 	color: var(--gray);
 }
 
+.novel-profile {
+	display: grid;
+	grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+	gap: 0;
+	margin: 36px 22px 74px;
+	border: 1px solid var(--line);
+}
+
+.novel-cover {
+	margin: 0;
+	padding: 18px;
+	border-right: 1px solid var(--line);
+}
+
+.novel-cover img {
+	display: block;
+	width: 100%;
+	height: auto;
+	background: #050505;
+}
+
+.novel-cover figcaption {
+	margin-top: 12px;
+	color: var(--gray-dark);
+	font-size: 0.7rem;
+	letter-spacing: 0.08em;
+}
+
+.novel-details {
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+}
+
+.novel-details article {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	min-height: 220px;
+	padding: clamp(24px, 4vw, 44px);
+}
+
+.novel-details article + article {
+	border-top: 1px solid var(--line);
+}
+
+.novel-details article > span {
+	color: var(--red);
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.16em;
+}
+
+.novel-details h2 {
+	margin: 24px 0 0;
+	font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.novel-details p {
+	margin: 12px 0 0;
+	color: var(--gray);
+}
+
+.novel-details p strong {
+	color: var(--white);
+	font-weight: 500;
+}
+
+.novel-details a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	margin-top: auto;
+	padding-top: 20px;
+	font-size: 0.78rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	text-underline-offset: 5px;
+}
+
+.novel-details a:hover {
+	color: var(--red);
+}
+
 .site-footer {
 	display: flex;
 	align-items: center;
@@ -1040,6 +1123,22 @@ a.event-document:hover {
 	.info-grid {
 		margin-right: 10px;
 		margin-left: 10px;
+	}
+
+	.novel-profile {
+		grid-template-columns: 1fr;
+		margin: 26px 10px 58px;
+	}
+
+	.novel-cover {
+		padding: 12px;
+		border-right: 0;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.novel-details article {
+		min-height: 190px;
+		padding: 24px 18px;
 	}
 
 	.summary-block {
