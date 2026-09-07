@@ -525,47 +525,58 @@ a.event-document:hover {
 }
 
 .archive-intro--filterable {
-	padding-right: 190px;
+	padding-right: min(46%, 480px);
 }
 
-.archive-filter {
+.archive-filter-bar {
 	position: absolute;
 	top: 50%;
 	right: 22px;
-	display: inline-flex;
+	display: flex;
 	align-items: center;
-	justify-content: center;
-	min-width: 132px;
-	min-height: 44px;
-	gap: 9px;
-	padding: 0 16px;
-	border: 1px solid var(--red);
-	background: transparent;
-	color: var(--red);
-	font: 800 0.72rem/1 var(--font-body);
-	letter-spacing: 0.1em;
-	cursor: pointer;
+	justify-content: flex-end;
+	width: min(420px, 42%);
+	gap: 8px;
+	flex-wrap: wrap;
 	transform: translateY(-50%);
 }
 
+.archive-filter {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 34px;
+	gap: 7px;
+	padding: 0 11px;
+	border: 1px solid var(--line);
+	background: transparent;
+	color: var(--gray);
+	font: 700 0.62rem/1 var(--font-body);
+	letter-spacing: 0.08em;
+	cursor: pointer;
+}
+
 .archive-filter i {
-	width: 7px;
-	height: 7px;
+	width: 5px;
+	height: 5px;
 	border: 1px solid currentColor;
 	border-radius: 50%;
 }
 
 .archive-filter:hover {
-	background: rgba(235, 34, 66, 0.12);
+	border-color: var(--gray);
+	color: var(--white);
 }
 
 .archive-filter[aria-pressed='true'] {
-	background: var(--red);
+	border-color: var(--red);
+	background: rgba(235, 34, 66, 0.08);
 	color: var(--white);
 }
 
 .archive-filter[aria-pressed='true'] i {
-	background: currentColor;
+	border-color: var(--red);
+	background: var(--red);
 }
 
 .archive-intro > span,
@@ -1223,11 +1234,16 @@ a.event-document:hover {
 		padding-right: 10px;
 	}
 
-	.archive-filter {
+	.archive-filter-bar {
 		position: static;
-		min-width: 0;
+		justify-content: flex-start;
+		width: 100%;
 		margin-top: 20px;
 		transform: none;
+	}
+
+	.archive-filter {
+		min-height: 44px;
 	}
 
 	.home-titlebar {

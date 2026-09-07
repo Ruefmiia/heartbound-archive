@@ -10,8 +10,10 @@ interface Props {
 	events: ArchiveEvent[];
 	emptyTitle?: string;
 	emptyDescription?: string;
-	filterType?: string;
-	filterLabel?: string;
+	filters?: Array<{
+		type: string;
+		label: string;
+	}>;
 }
 
 const {
@@ -21,27 +23,30 @@ const {
 	events,
 	emptyTitle = '暂无档案',
 	emptyDescription = '相关信息确认后会在这里补充。',
-	filterType,
-	filterLabel,
+	filters = [],
 } = Astro.props;
 ---
 
 <Layout title={`${title}｜Heartbound档案库`} description={description}>
-	<section class:list={['archive-intro', { 'archive-intro--filterable': filterType }]} aria-labelledby="archive-title">
+	<section class:list={['archive-intro', { 'archive-intro--filterable': filters.length > 0 }]} aria-labelledby="archive-title">
 		<span>{eyebrow}</span>
 		<h1 id="archive-title">{title}</h1>
 		<p>{description}</p>
-		{filterType && filterLabel && (
-			<button
-				class="archive-filter"
-				type="button"
-				data-event-filter
-				data-filter-type={filterType}
-				aria-pressed="false"
-			>
-				<i aria-hidden="true"></i>
-				{filterLabel}
-			</button>
+		{filters.length > 0 && (
+			<div class="archive-filter-bar" data-event-filter-bar aria-label="按制作类型筛选">
+				{filters.map((filter) => (
+					<button
+						class="archive-filter"
+						type="button"
+						data-event-filter
+						data-filter-type={filter.type}
+						aria-pressed="false"
+					>
+						<i aria-hidden="true"></i>
+						{filter.label}
+					</button>
+				))}
+			</div>
 		)}
 	</section>
 
@@ -69,7 +74,11 @@ const {
 			const nextActive = !isActive;
 			const filterType = button.dataset.filterType;
 			const results = button.closest('main')?.querySelector('[data-filter-results]');
+			const filterBar = button.closest('[data-event-filter-bar]');
 
+			for (const peer of filterBar?.querySelectorAll<HTMLButtonElement>('[data-event-filter]') ?? []) {
+				peer.setAttribute('aria-pressed', 'false');
+			}
 			button.setAttribute('aria-pressed', String(nextActive));
 			for (const row of results?.querySelectorAll<HTMLElement>('[data-event-type]') ?? []) {
 				row.hidden = nextActive && row.dataset.eventType !== filterType;
