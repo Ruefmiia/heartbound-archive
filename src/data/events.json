@@ -1,5 +1,19 @@
 [
 	{
+		"id": "010",
+		"date": "2026-09-07",
+		"day": "07",
+		"monthZh": "九月",
+		"title": "《Heartbound》第一次Workshop",
+		"summary": "《Heartbound》进行第一次Workshop，Perth通过Instagram Story发布现场合照。",
+		"type": "Workshop",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://github.com/Ruefmiia/heartbound-archive/blob/main/archive/assets/2026-09/2026-09-07-perth-igs-first-workshop.jpg"
+	},
+	{
 		"id": "009",
 		"date": "2026-09-05",
 		"day": "05",
@@ -80,7 +94,8 @@
 		"tone": "official",
 		"sections": [
 			"promotion"
-		]
+		],
+		"href": "https://www.instagram.com/p/Da-42omgZo-/?stkn=d25xdmR3MWx5Z2xm"
 	},
 	{
 		"id": "003",
@@ -107,7 +122,8 @@
 		"sections": [
 			"production",
 			"materials"
-		]
+		],
+		"href": "https://www.instagram.com/p/Da-yjNEj1bk/?img_index=7&stkn=Z2llNzVoeHQzcmdv"
 	},
 	{
 		"id": "001",
