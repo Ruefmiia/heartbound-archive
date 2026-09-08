@@ -1125,7 +1125,7 @@ a.event-document:hover {
 
 .home-facts {
 	display: grid;
-	grid-template-columns: 1.35fr 1.35fr 0.8fr 1fr;
+	grid-template-columns: 2fr 0.8fr 1fr;
 	min-height: 56px;
 	border-bottom: 1px solid var(--line);
 }
@@ -1158,19 +1158,32 @@ a.event-document:hover {
 	color: var(--black);
 }
 
-.home-person-links > span {
+.home-cast-accounts {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 3px 10px;
+	align-items: center;
+	gap: 3px 9px;
 }
 
-.home-person-links a {
+.home-cast-accounts b {
+	font-size: 0.65rem;
+	letter-spacing: 0.04em;
+}
+
+.home-cast-accounts i {
+	width: 1px;
+	height: 14px;
+	margin: 0 2px;
+	background: var(--line);
+}
+
+.home-cast-accounts a {
 	color: inherit;
 	font-size: 0.68rem;
 	text-decoration: none;
 }
 
-.home-person-links a:hover {
+.home-cast-accounts a:hover {
 	color: var(--red);
 }
 
@@ -1234,15 +1247,7 @@ a.event-document:hover {
 	}
 
 	.home-facts {
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	.home-facts > :nth-child(2) {
-		border-right: 0;
-	}
-
-	.home-facts > :nth-child(-n + 2) {
-		border-bottom: 1px solid var(--line);
+		grid-template-columns: 1.7fr 0.8fr 1fr;
 	}
 }
 
