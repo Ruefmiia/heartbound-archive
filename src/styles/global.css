@@ -1125,13 +1125,14 @@ a.event-document:hover {
 
 .home-facts {
 	display: grid;
-	grid-template-columns: 1.55fr 1fr 0.75fr 1fr;
+	grid-template-columns: 1.35fr 1.35fr 0.8fr 1fr;
 	min-height: 56px;
 	border-bottom: 1px solid var(--line);
 }
 
 .home-facts > span,
-.home-facts > a {
+.home-facts > a,
+.home-facts > div {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -1155,6 +1156,22 @@ a.event-document:hover {
 .home-facts > a:hover {
 	background: var(--white);
 	color: var(--black);
+}
+
+.home-person-links > span {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px 10px;
+}
+
+.home-person-links a {
+	color: inherit;
+	font-size: 0.68rem;
+	text-decoration: none;
+}
+
+.home-person-links a:hover {
+	color: var(--red);
 }
 
 .home-directory {
@@ -1290,7 +1307,8 @@ a.event-document:hover {
 	}
 
 	.home-facts > span,
-	.home-facts > a {
+	.home-facts > a,
+	.home-facts > div {
 		min-height: 48px;
 		padding-right: 10px;
 		padding-left: 10px;
