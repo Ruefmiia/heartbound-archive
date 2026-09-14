@@ -28,7 +28,13 @@ const toneLabel = {
 			<span>RECORD NO. {event.id}</span>
 			{event.type === 'Workshop' && <span class="event-kind">WORKSHOP</span>}
 		</div>
-		<h3>{event.title}</h3>
+		<h3>
+			{event.archiveUrl ? (
+				<a class="event-title-link" href={event.archiveUrl} target="_blank" rel="noreferrer">
+					{event.title}
+				</a>
+			) : event.title}
+		</h3>
 		<p>{event.summary}</p>
 		<div class="event-links">
 			<span class:list={['event-source-type', `event-source-type--${event.tone}`]}>{toneLabel}</span>
