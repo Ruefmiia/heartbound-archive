@@ -5,6 +5,8 @@ export type ArchiveSection = 'production' | 'promotion' | 'episodes' | 'material
 export interface ArchiveEvent {
 	id: string;
 	date: string;
+	time?: string;
+	timezone?: string;
 	day: string;
 	monthZh: string;
 	title: string;

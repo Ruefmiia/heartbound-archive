@@ -1,5 +1,21 @@
 [
 	{
+		"id": "013",
+		"date": "2026-09-15",
+		"time": "09:00",
+		"timezone": "UTC+8",
+		"day": "15",
+		"monthZh": "九月",
+		"title": "招商片YouTube播放量突破150万",
+		"summary": "截至2026年9月15日09:00（UTC+8），《Heartbound》招商片在YouTube的播放量超过150万次。",
+		"type": "播放里程碑",
+		"tone": "official",
+		"sections": [
+			"promotion"
+		],
+		"href": "https://www.youtube.com/watch?v=I1guVkLJ4mU"
+	},
+	{
 		"id": "012",
 		"date": "2026-09-14",
 		"day": "14",
