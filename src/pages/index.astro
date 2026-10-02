@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { events } from '../data/events';
 
-const latestEvent = events[0];
+const sortedEvents = [...events].sort(
+	(a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id),
+);
+const latestEvent = sortedEvents[0];
 const latestShortDate = latestEvent?.date.slice(5).replace('-', '.') ?? '—';
-const latestProductionEvents = events.filter((event) => event.sections.includes('production')).slice(0, 3);
+const latestEvents = sortedEvents.slice(0, 3);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sitePath = (path: string) => `${base}${path}` || '/';
 const assetBase = import.meta.env.BASE_URL.endsWith('/')
@@ -102,14 +105,14 @@ const directories = [
 			<section class="home-updates" aria-labelledby="updates-title">
 				<div class="home-panel-heading home-panel-heading--row">
 					<div>
-						<span>LATEST PROGRESS</span>
+						<span>LATEST UPDATES</span>
 						<h2 id="updates-title">最近近况</h2>
 					</div>
-					<a href={sitePath('/production')} aria-label="查看全部制作档案">全部 →</a>
+					<a href={sitePath('/timeline')} aria-label="查看完整时间线">全部 →</a>
 				</div>
 
 				<div class="home-update-list">
-					{latestProductionEvents.map((event) => (
+					{latestEvents.map((event) => (
 						<article>
 							<time datetime={event.date}>{event.date.slice(5).replace('-', '.')}</time>
 							<div>
