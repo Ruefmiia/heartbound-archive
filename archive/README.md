@@ -12,7 +12,8 @@ archive/
 │   ├── 2026-07.md
 │   ├── 2026-08.md
 │   ├── 2026-09.md
-│   └── 2026-10.md
+│   ├── 2026-10.md
+│   └── 2026-11.md
 ├── categories/              # 从月度文档整理出的分类阅读视图
 │   ├── production.md
 │   ├── promotion.md

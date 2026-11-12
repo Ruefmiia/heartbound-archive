@@ -15,9 +15,9 @@ const assetBase = import.meta.env.BASE_URL.endsWith('/')
 	: `${import.meta.env.BASE_URL}/`;
 
 const progressSteps = [
-	{ label: '项目公开', state: 'done' },
-	{ label: '招商片', state: 'done' },
-	{ label: 'Workshop', state: 'current' },
+	{ label: '项目公开 / 招商片', state: 'done' },
+	{ label: 'Workshop', state: 'done' },
+	{ label: '剧本围读', state: 'current' },
 	{ label: '正式拍摄', state: 'future' },
 	{ label: '播出', state: 'future' },
 ];
@@ -46,7 +46,7 @@ const directories = [
 			</div>
 			<div class="home-current">
 				<span><i aria-hidden="true"></i> 当前阶段</span>
-				<strong>Workshop进行中</strong>
+				<strong>剧本围读进行中</strong>
 				<small>UPDATED {latestShortDate}</small>
 			</div>
 		</header>

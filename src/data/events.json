@@ -1,5 +1,21 @@
 [
 	{
+		"id": "017",
+		"date": "2026-11-11",
+		"day": "11",
+		"monthZh": "十一月",
+		"title": "《Heartbound》开始剧本围读",
+		"summary": "《Heartbound》官方X账号宣布剧本围读（Read Through）开始并发布演员合照；Perth、Santa等演员转发，Perth另发布PerthSanta与导演Fon Kanittha的合影。",
+		"type": "剧本围读",
+		"tone": "official",
+		"sections": [
+			"production",
+			"materials"
+		],
+		"href": "https://github.com/Ruefmiia/heartbound-archive/blob/main/archive/assets/2026-11/2026-11-11-heartbound-x-read-through-post.jpg",
+		"archiveUrl": "https://github.com/Ruefmiia/heartbound-archive/blob/main/archive/assets/2026-11/2026-11-11-heartbound-x-read-through-post.jpg"
+	},
+	{
 		"id": "016",
 		"date": "2026-10-08",
 		"day": "08",
