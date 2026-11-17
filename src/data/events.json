@@ -1,5 +1,19 @@
 [
 	{
+		"id": "018",
+		"date": "2026-11-17",
+		"day": "17",
+		"monthZh": "十一月",
+		"title": "Perth、Santa与Tytan参加表演课",
+		"summary": "Perth通过Instagram Story分享与表演老师的合照，主要演员Perth、Santa与Tytan共同参加表演课。",
+		"type": "Workshop",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://github.com/Ruefmiia/heartbound-archive/blob/main/archive/assets/2026-11/2026-11-17-perth-igs-acting-class-photo-1.jpg"
+	},
+	{
 		"id": "017",
 		"date": "2026-11-11",
 		"day": "11",
