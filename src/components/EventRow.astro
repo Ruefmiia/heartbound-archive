@@ -27,6 +27,7 @@ const toneLabel = {
 		<div class="event-meta">
 			<span>RECORD NO. {event.id}</span>
 			{event.type === 'Workshop' && <span class="event-kind">WORKSHOP</span>}
+			{event.type === '定妆照' && <span class="event-kind">定妆照</span>}
 		</div>
 		<h3>
 			{event.archiveUrl ? (

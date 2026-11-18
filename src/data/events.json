@@ -1,5 +1,35 @@
 [
 	{
+		"id": "020",
+		"date": "2026-11-18",
+		"day": "18",
+		"monthZh": "十一月",
+		"title": "官方发布角色定妆照",
+		"summary": "Heartbound官方X账号分批发布六位角色及PerthSanta双人定妆照；Perth随后分享另一套妆造的拍摄现场照片。",
+		"type": "定妆照",
+		"tone": "official",
+		"sections": [
+			"production",
+			"materials"
+		],
+		"href": "https://github.com/Ruefmiia/heartbound-archive/blob/main/archive/assets/2026-11/fitting/posts/01-perth-character-post.jpg",
+		"archiveUrl": "https://github.com/Ruefmiia/heartbound-archive/blob/main/archive/fitting/2026-11-18-character-fitting.md"
+	},
+	{
+		"id": "019",
+		"date": "2026-11-18",
+		"day": "18",
+		"monthZh": "十一月",
+		"title": "Santa X更新Workshop合照",
+		"summary": "Santa在X发布《Heartbound》Workshop多人合照并带上剧集标签，Perth随后转发。",
+		"type": "Workshop",
+		"tone": "participant",
+		"sections": [
+			"production"
+		],
+		"href": "https://github.com/Ruefmiia/heartbound-archive/blob/main/archive/assets/2026-11/2026-11-18-santa-x-workshop-group-photo.png"
+	},
+	{
 		"id": "018",
 		"date": "2026-11-17",
 		"day": "17",

@@ -10,5 +10,8 @@ const productionEvents = events.filter((event) => event.sections.includes('produ
 	title="制作档案"
 	description="记录Workshop、剧本围读、定妆、拍摄与杀青等制作节点。"
 	events={productionEvents}
-	filters={[{ type: 'Workshop', label: 'WORKSHOP' }]}
+	filters={[
+		{ type: 'Workshop', label: 'WORKSHOP' },
+		{ type: '定妆照', label: '定妆照' },
+	]}
 />
